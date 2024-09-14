@@ -43,7 +43,7 @@ def main():
         title = re.sub(r' \(\d+\)', '', title)
         if first:
             with open(SAVE_PATH, 'w') as f:
-                f.write(title[:title.find(':')])
+                f.write(title.strip())
             first = False
 
         embed = discord.Embed(title=title, url=url)
