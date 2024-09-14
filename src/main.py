@@ -23,7 +23,7 @@ def send_msg(msg: discord.Embed):
 
 def main():
     with open(SAVE_PATH, 'r') as f:
-        last_cve = f.read()
+        last_notified = f.read()
     r = requests.get(f'{ROOT}/upstream')
     buf = r.text[r.text.find('<caption id="open"'):]
     first = True
@@ -41,6 +41,8 @@ def main():
         url, title = m.groups()
         url = f'{ROOT}/{url}'
         title = re.sub(r' \(\d+\)', '', title)
+        if last_notified == title:
+            break
         if first:
             with open(SAVE_PATH, 'w') as f:
                 f.write(title.strip())
