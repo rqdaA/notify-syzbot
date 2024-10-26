@@ -37,6 +37,9 @@ def main():
         if tags is None:
             # print('tags not found')
             continue
+        for tag in tags:
+            if tag.endswith('fs'):
+                continue
 
         url, title = m.groups()
         url = f'{ROOT}/{url}'
