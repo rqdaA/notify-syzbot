@@ -21,6 +21,13 @@ def send_msg(msg: discord.Embed):
 
     client.run(TOKEN)
 
+def is_banned(tags) -> bool:
+    if any(map(lambda tag: tag.endswith('fs'), tags)):
+        return False
+    if any(map(lambda ban: ban in tags, ('ext4', 'ocfs2'))):
+        return False
+    return True
+
 def main():
     with open(SAVE_PATH, 'r') as f:
         last_notified = f.read()
@@ -37,9 +44,8 @@ def main():
         if tags is None:
             # print('tags not found')
             continue
-        for tag in tags:
-            if tag.endswith('fs'):
-                continue
+        if is_banned(tags):
+            continue
 
         url, title = m.groups()
         url = f'{ROOT}/{url}'
