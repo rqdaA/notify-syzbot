@@ -23,10 +23,10 @@ def send_msg(msg: discord.Embed):
 
 def is_banned(tags) -> bool:
     if any(map(lambda tag: tag.endswith('fs'), tags)):
-        return False
+        return True
     if any(map(lambda ban: ban in tags, ('ext4', 'ocfs2'))):
-        return False
-    return True
+        return True
+    return False
 
 def main():
     with open(SAVE_PATH, 'r') as f:
