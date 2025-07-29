@@ -9,7 +9,7 @@ load_dotenv()
 CHANNEL=int(os.getenv("CHANNEL",'0'))
 TOKEN=os.getenv("TOKEN",'')
 ROOT='https://syzkaller.appspot.com'
-SAVE_PATH='/workdir/notified_syzbot.txt'
+SAVE_PATH=os.getenv("SAVE_PATH", "")
 
 def send_msg(msg: discord.Embed):
     client = discord.Client(intents=discord.Intents.default())
